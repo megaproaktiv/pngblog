@@ -1,0 +1,47 @@
+# GoReleaser configuration — https://goreleaser.com
+# pngblog is a macOS clipboard tool, so releases target darwin only.
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: pngblog
+    main: .
+    binary: pngblog
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - id: pngblog
+    formats: [tar.gz]
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  use: git
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+release:
+  github:
+    owner: megaproaktiv
+    name: pngblog

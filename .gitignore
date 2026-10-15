@@ -1,0 +1,14 @@
+# Local configuration (may contain machine-specific paths)
+pngblog.yml
+
+# Built binary
+/pngblog
+
+# GoReleaser output
+/dist/
+
+# Taskfile cache
+.task/
+
+# macOS
+.DS_Store

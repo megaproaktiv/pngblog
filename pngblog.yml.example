@@ -1,0 +1,25 @@
+# pngblog example configuration
+#
+# Copy this file to pngblog.yml and adjust the paths for your machine:
+#
+#   cp pngblog.yml.example pngblog.yml
+#
+# pngblog looks for pngblog.yml in the current directory, then in $HOME.
+# (This .example file is committed; pngblog.yml itself is gitignored.)
+#
+# The three settings compose the save path and the Markdown image URL:
+#
+#   save path: <base>/<static>/<img>/<YYYY>/<MM>/image-<NN>.png
+#   markdown:  ![<NN>](/<img>/<YYYY>/<MM>/image-<NN>.png)
+#
+# Precedence: environment variables (PNGBLOG_BASE, PNGBLOG_STATIC, PNGBLOG_IMG)
+# override values here, which in turn override the built-in defaults.
+
+# Filesystem root of the blog's assets.
+base: /path/to/your/blog
+
+# Directory under base holding static assets (Hugo convention: "static").
+static: static
+
+# Directory under static holding images.
+img: img

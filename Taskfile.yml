@@ -1,0 +1,35 @@
+# Taskfile for pngblog - https://taskfile.dev
+version: '3'
+
+vars:
+  BINARY: pngblog
+  INSTALL_DIR: /usr/local/bin
+
+tasks:
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list
+    silent: true
+
+  build:
+    desc: Build the pngblog binary into the current directory
+    cmds:
+      - go build -o {{.BINARY}} .
+    sources:
+      - '*.go'
+      - go.mod
+    generates:
+      - '{{.BINARY}}'
+
+  install:
+    desc: Build and copy the binary to {{.INSTALL_DIR}}
+    deps: [build]
+    cmds:
+      - install -m 0755 {{.BINARY}} {{.INSTALL_DIR}}/{{.BINARY}}
+      - echo "Installed {{.BINARY}} to {{.INSTALL_DIR}}/{{.BINARY}}"
+
+  clean:
+    desc: Remove the built binary
+    cmds:
+      - rm -f {{.BINARY}}
